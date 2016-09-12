@@ -11,7 +11,7 @@
       "39": "images/popupyt_38.png"
     },
     "default_popup": "popup.html",
-    "default_title": "Pop up YouTube page"
+    "default_title": "Switch YouTube video view"
   },
   "permissions": [
     "activeTab"
