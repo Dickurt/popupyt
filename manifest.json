@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  
+  "name": "YouTube Popup",
+  "description": "Turns the current YouTube page into a popup window, so you can play it in the corner of your screen.",
+  "version": "0.1",
+
+  "browser_action": {
+    "default_icon": {
+      "19": "images/popupyt_19.png",
+      "39": "images/popupyt_38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Pop up YouTube page"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "icons": {
+    "16": "images/popupyt_16.png",
+    "48": "images/popupyt_48.png",
+    "128": "images/popupyt_128.png"
+  }
+}
