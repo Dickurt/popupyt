@@ -9,7 +9,7 @@ function closePopupDelayed() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  renderStatus('Gaining momentum...');
+  renderStatus('Fetching current tab info...');
 
   // We only have permission to get the active tab.
   var queryInfo = {
@@ -27,9 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var regexYoutubeWatchLink = /https:\/\/www.youtube.com\/watch\?v=/;
     var regexYoutubeEmbedLink = /https:\/\/www.youtube.com\/embed\//;
 
+    renderStatus('Checking current video format...');
+
     // Is it a '/watch?v=', or an '/embed/' link? Is it even a YouTube link at all?
     if(regexYoutubeWatchLink.test(url)) {
-      renderStatus('Popping up...');
+      renderStatus('Switching to embedded view...');
 
       // Some nasty string manipulation that I won't understand when I read this two months later, so let's explain:
       // baseYoutubeWatchUrl.length - 5 --> Means url without the 'watch' part
@@ -40,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Update the url, and we're done!
       chrome.tabs.update(tab.id, {url: newUrl}, function() {
-        renderStatus('Done popping up!');
+        renderStatus('Switched to embedded view!');
         closePopupDelayed();
       });
     } else if(regexYoutubeEmbedLink.test(url)) {
       // We have found that the url is that of an embedded video.
       // So now we'll try to convert it to a regular YouTube page url again.
-      renderStatus('Popping back in...');      
+      renderStatus('Switching to page view...');      
 
       // Some nasty string manipulation that I won't understand when I read this two months later, so let's explain:
       // baseYoutubeEmbedUrl.length - 6 --> Means url without the 'embed/' part
@@ -56,11 +58,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Update the url, and we're done!
       chrome.tabs.update(tab.id, {url: newUrl}, function() {
-        renderStatus('Done popping in!');
+        renderStatus('Switched to regular view!');
         closePopupDelayed();
       });
     } else {
-      renderStatus('This is not a YouTube video url/page. Aborting...');
+      renderStatus('This is not a YouTube video url or page. Aborting...');
       return;
     }
   });
